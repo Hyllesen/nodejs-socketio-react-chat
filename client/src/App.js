@@ -16,8 +16,9 @@ const App = () => {
   }, []);
 
   function messageEventHandler() {
+    setMessages(messages => [...messages, "test"]);
     socket.current.on("message", message => {
-      setMessages([...messages, message]);
+      setMessages(messages => [...messages, message]);
     });
   }
 
