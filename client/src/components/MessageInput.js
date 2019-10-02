@@ -8,12 +8,14 @@ const MessageInput = ({ sendMessage }) => {
       onSubmit={e => {
         e.preventDefault();
         sendMessage(message);
+        setMessage("");
       }}
     >
       <input
         placeholder="Enter message..."
         type="text"
         onChange={e => setMessage(e.target.value)}
+        value={message}
       />
     </form>
   );
