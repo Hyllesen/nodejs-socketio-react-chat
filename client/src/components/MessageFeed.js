@@ -4,8 +4,8 @@ const MessageFeed = ({ messages }) => {
   console.log(messages);
   if (messages) {
     return messages.map(message => (
-      <div key={message.from + message.msg}>
-        {message.from}: {message.msg}
+      <div key={message.from + message.message}>
+        {message.from}: {message.message}
       </div>
     ));
   }

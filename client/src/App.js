@@ -31,7 +31,7 @@ const App = () => {
       }
       messages[message.from].push(message);
       console.log(messages);
-      setMessages(currentMessages => messages);
+      setMessages(messages);
       if (openChats.indexOf(message.from) === -1) {
         setOpenChats(openChats => [...openChats, message.from]);
       }
