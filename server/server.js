@@ -11,19 +11,26 @@ const io = require("socket.io")(server, {
 server.listen(3001);
 
 const people = {};
+const sockets = {};
 const usernames = [];
 
 io.on("connection", socket => {
   console.log("connection happened", socket.id);
-  socket.on("user_join", username => {
+  socket.on("user-join", username => {
     console.log("a user is joining the chat", username);
     people[socket.id] = username;
+    sockets[username] = socket;
     usernames.push(username);
-    io.emit("users_online", usernames);
+    io.emit("users-online", usernames);
   });
-  socket.on("message", msg => {
-    console.log("a user is sending message", msg);
-    io.emit("message", { from: people[socket.id], msg });
+  socket.on("private-message", ({ message, toUsername }) => {
+    console.log("private message");
+    console.log(message, toUsername);
+    const receivingSocketId = sockets[toUsername].id;
+    io.sockets.sockets[receivingSocketId].emit("private-message", {
+      from: people[socket.id],
+      message
+    });
   });
   socket.on("disconnect", () => {
     const username = people[socket.id];
@@ -31,6 +38,6 @@ io.on("connection", socket => {
     usernames.splice(index, 1);
     delete people[socket.id];
     console.log("disconnect", socket.id);
-    io.emit("users_online", usernames);
+    io.emit("users-online", usernames);
   });
 });

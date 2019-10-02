@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
-const MessageInput = ({ sendMessage }) => {
+const MessageInput = ({ sendMessage, toUsername }) => {
   const [message, setMessage] = useState("");
 
   return (
     <form
       onSubmit={e => {
         e.preventDefault();
-        sendMessage(message);
+        console.log(message, toUsername);
+        sendMessage({ message, toUsername });
         setMessage("");
       }}
     >
