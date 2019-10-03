@@ -27,14 +27,18 @@ const App = () => {
   function privateMessageHandler() {
     socket.current.on("private-message", message => {
       console.log("WE GOT A PRIVATE MESSAGE", message);
-      debugger;
-      const currentMessages = messages;
-      if (!currentMessages.hasOwnProperty(message.from)) {
-        currentMessages[message.from] = [];
-      }
-      currentMessages[message.from].push(message);
-      setMessages(msg => currentMessages);
+      const { from } = message;
+      addNewMessagesToState(message, from);
     });
+  }
+
+  function addNewMessagesToState(message, username) {
+    let currentMessages = messages[username];
+    if (!currentMessages) {
+      currentMessages = [];
+    }
+    currentMessages.push(message);
+    setMessages({ ...messages, [username]: currentMessages });
   }
 
   function usersOnlineHandler() {
@@ -51,12 +55,7 @@ const App = () => {
   function sendPrivateMessage(message) {
     message.from = username;
     const { toUsername } = message;
-    let currentMessages = messages[toUsername];
-    if (!currentMessages) {
-      currentMessages = [];
-    }
-    currentMessages.push(message);
-    setMessages({ ...messages, [toUsername]: currentMessages });
+    addNewMessagesToState(message, toUsername);
     socket.current.emit("private-message", message);
   }
 
