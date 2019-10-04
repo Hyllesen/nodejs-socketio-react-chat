@@ -7,8 +7,6 @@ import PrivateChat from "./components/PrivateChat";
 import OpenChats from "./components/OpenChats";
 import io from "socket.io-client";
 
-const functions = new Set();
-
 const App = () => {
   const socket = useRef(null);
   const [username, setUsername] = useState("");
@@ -37,8 +35,6 @@ const App = () => {
     socket.current.emit("private-message", message);
   };
 
-  functions.add(sendPrivateMessage);
-
   function addNewMessagesToState(message, username) {
     if (!messages[username]) {
       messages[username] = [];
@@ -61,10 +57,6 @@ const App = () => {
     usersOnlineHandler(username);
   }
 
-  function openPrivateChat(username) {
-    setChatSelected(username);
-  }
-
   const privateChatWindow =
     chatSelected !== "" ? (
       <PrivateChat userSelected={chatSelected}>
@@ -81,7 +73,7 @@ const App = () => {
       <UsernameInput submitUsername={submitUsername} />
       <UsersOnline
         usersOnline={usersOnline}
-        openPrivateChat={openPrivateChat}
+        openPrivateChat={setChatSelected}
       />
       <OpenChats messages={messages} />
       {privateChatWindow}

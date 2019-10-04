@@ -1,7 +1,7 @@
-Fix so that if receiver sends message, sender will not get messages deleted
 Allow group messages
-Have read/unread notifications
 Create nice layout
+Have read/unread notifications
 
 DONE
 Remove self user from Users online list
+Fix so that if receiver sends message, sender will not get messages deleted
