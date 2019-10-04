@@ -21,7 +21,7 @@ const App = () => {
     return () => {
       socket.current.disconnect();
     };
-  }, []);
+  }, [messages]);
 
   function privateMessageHandler() {
     socket.current.on("private-message", message => {
@@ -40,11 +40,12 @@ const App = () => {
   functions.add(sendPrivateMessage);
 
   function addNewMessagesToState(message, username) {
-    if (!messages[username]) {
-      messages[username] = [];
+    let currentMessages = messages[username];
+    if (!currentMessages) {
+      currentMessages = [];
     }
-    messages[username].push(message);
-    setMessages({ ...messages, [username]: messages[username] });
+    currentMessages.push(message);
+    setMessages({ ...messages, [username]: currentMessages });
   }
 
   function usersOnlineHandler(username) {

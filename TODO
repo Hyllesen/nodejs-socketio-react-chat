@@ -1,3 +1,7 @@
-Remove self user from Users online list
-Show sent messages from self in Private chat
+Fix so that if receiver sends message, sender will not get messages deleted
 Allow group messages
+Have read/unread notifications
+Create nice layout
+
+DONE
+Remove self user from Users online list
