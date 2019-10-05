@@ -1,12 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import WelcomeScreen from "./screens/WelcomeScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Changing something here now!</Text>
-    </View>
-  );
+  return <WelcomeScreen />;
 }
 
 const styles = StyleSheet.create({
