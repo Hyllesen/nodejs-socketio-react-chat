@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.10.1",
+    "react-chat-ui": "^0.3.2",
     "react-dom": "^16.10.1",
     "react-scripts": "3.1.2",
     "socket.io-client": "^2.3.0"

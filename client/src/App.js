@@ -3,7 +3,6 @@ import UsernameInput from "./components/UsernameInput";
 import MessageFeed from "./components/MessageFeed";
 import MessageInput from "./components/MessageInput";
 import UsersOnline from "./components/UsersOnline";
-import PrivateChat from "./components/PrivateChat";
 import OpenChats from "./components/OpenChats";
 import io from "socket.io-client";
 
@@ -15,18 +14,10 @@ const App = () => {
   const [chatSelected, setChatSelected] = useState("");
   useEffect(() => {
     socket.current = io("http://localhost:3001");
-    privateMessageHandler();
     return () => {
       socket.current.disconnect();
     };
   }, []);
-
-  function privateMessageHandler() {
-    socket.current.on("private-message", message => {
-      const { from } = message;
-      addNewMessagesToState(message, from);
-    });
-  }
 
   const sendPrivateMessage = message => {
     message.from = username;
@@ -60,7 +51,7 @@ const App = () => {
   const privateChatWindow =
     chatSelected !== "" ? (
       <PrivateChat userSelected={chatSelected}>
-        <MessageFeed messages={messages[chatSelected]} />
+        <MessageFeed username={username} messages={messages[chatSelected]} />
         <MessageInput
           sendMessage={sendPrivateMessage}
           toUsername={chatSelected}
@@ -75,8 +66,6 @@ const App = () => {
         usersOnline={usersOnline}
         openPrivateChat={setChatSelected}
       />
-      <OpenChats messages={messages} />
-      {privateChatWindow}
     </div>
   );
 };

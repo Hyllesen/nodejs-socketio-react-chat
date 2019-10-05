@@ -1,13 +1,18 @@
 import React from "react";
+import { ChatFeed, Message } from "react-chat-ui";
 
-const MessageFeed = ({ messages }) => {
+const MessageFeed = ({ messages, username }) => {
   console.log(messages);
   if (messages) {
-    return messages.map(message => (
-      <div key={message.from + message.message}>
-        {message.from}: {message.message}
-      </div>
-    ));
+    messages = messages.map(
+      message =>
+        new Message({
+          id: message.from === username ? 0 : 1,
+          senderName: message.from,
+          message: message.message
+        })
+    );
+    return <ChatFeed showSenderName messages={messages} />;
   }
   return <div></div>;
 };

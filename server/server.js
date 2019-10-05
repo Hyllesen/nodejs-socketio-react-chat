@@ -23,6 +23,9 @@ io.on("connection", socket => {
     usernames.push(username);
     io.emit("users-online", usernames);
   });
+  socket.on("message", msg => {
+    io.emit("message", msg);
+  });
   socket.on("private-message", ({ message, toUsername }) => {
     console.log("private message");
     console.log(message, toUsername);
