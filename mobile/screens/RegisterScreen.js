@@ -42,7 +42,7 @@ export default function RegisterScreen() {
       </View>
       <View style={subContainer}>
         <Text>Already have an account?</Text>
-        <Text style={{ fontWeight: "bold" }}>SIGN IN</Text>
+        <Text style={{ fontWeight: "bold" }}>Sign in</Text>
       </View>
     </View>
   );

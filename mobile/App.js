@@ -2,9 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 export default function App() {
-  return <WelcomeScreen />;
+  return <LoginScreen />;
 }
 
 const styles = StyleSheet.create({
