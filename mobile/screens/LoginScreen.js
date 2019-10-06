@@ -20,7 +20,7 @@ export default function LoginScreen() {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}></View>
-      <KeyboardAvoidingView style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Image source={require("../assets/chat-logo.png")} />
         <TextInput
           onChangeText={text => onChangeEmail(text)}
