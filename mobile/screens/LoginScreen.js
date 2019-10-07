@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Dimensions
 } from "react-native";
+import axios from "axios";
 import Button from "../components/Button";
 
 const { width } = Dimensions.get("window");
@@ -16,7 +17,12 @@ const { width } = Dimensions.get("window");
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [password1, onChangePassword1] = React.useState("");
-  const { subContainer, textInput } = styles;
+  const { textInput } = styles;
+
+  const login = async () => {
+    axios.post("https://localhost:3002/auth/signin");
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}></View>

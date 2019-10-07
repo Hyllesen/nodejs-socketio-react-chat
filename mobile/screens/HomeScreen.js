@@ -1,26 +1,23 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  SafeAreaView,
-  Image,
-  KeyboardAvoidingView,
-  Dimensions
-} from "react-native";
-import Button from "../components/Button";
-
-const { width } = Dimensions.get("window");
+import { StyleSheet, View, Text, Image, AsyncStorage } from "react-native";
 
 export default function HomeScreen() {
-  const [email, onChangeEmail] = React.useState("");
-  const [password1, onChangePassword1] = React.useState("");
-  const { subContainer, textInput } = styles;
+  const [token, setToken] = React.useState("");
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  const getToken = async () => {
+    const token = AsyncStorage.getItem("userToken");
+    setToken(token);
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <Image source={require("../assets/chat-logo.png")} />
       <Text>Home sweet home</Text>
+      <Text>Your token is: {token}</Text>
     </View>
   );
 }
@@ -32,11 +29,6 @@ const styles = StyleSheet.create({
     flex: 12,
     justifyContent: "space-between",
     alignItems: "center"
-  },
-  textInput: {
-    borderBottomColor: "#D3D4E9",
-    borderBottomWidth: 1,
-    width: width / 1.3
   },
   subContainer: {
     alignSelf: "center"
