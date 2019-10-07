@@ -4,21 +4,21 @@ import {
   View,
   Text,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  SafeAreaView
 } from "react-native";
 import Button from "../components/Button";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ navigation }) {
   const [username, onChangeUsername] = React.useState("");
   const [email, onChangeEmail] = React.useState("");
   const [password1, onChangePassword1] = React.useState("");
   const [password2, onChangePassword2] = React.useState("");
-  const { buttonContainer, subContainer, textInput } = styles;
+  const { buttonContainer, textInput } = styles;
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <View style={subContainer}>
-        <Text style={{ fontSize: 20 }}>Create New Account</Text>
-      </View>
+      <View style={{ flex: 2 }} />
       <TextInput
         onChangeText={text => onChangeUsername(text)}
         value={username}
@@ -46,10 +46,12 @@ export default function RegisterScreen() {
       <View style={buttonContainer}>
         <Button text="REGISTER" bgColor="#12148A" />
       </View>
-      <View style={subContainer}>
-        <Text>Already have an account?</Text>
-        <Text style={{ fontWeight: "bold" }}>Sign in</Text>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+        <View style={{ alignItems: "center", marginBottom: 40 }}>
+          <Text>Already have an account?</Text>
+          <Text style={{ fontWeight: "bold" }}>Sign in</Text>
+        </View>
+      </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 }
@@ -68,7 +70,6 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   subContainer: {
-    marginTop: 100,
     flex: 3,
     alignSelf: "center"
   },
@@ -76,7 +77,6 @@ const styles = StyleSheet.create({
     flex: 2
   },
   textStyle: {
-    color: "#0086FF",
     fontSize: 40
   }
 });

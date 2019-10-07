@@ -4,7 +4,7 @@ import {
   View,
   Text,
   TextInput,
-  SafeAreaView,
+  TouchableOpacity,
   Image,
   KeyboardAvoidingView,
   Dimensions
@@ -13,7 +13,7 @@ import Button from "../components/Button";
 
 const { width } = Dimensions.get("window");
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [password1, onChangePassword1] = React.useState("");
   const { subContainer, textInput } = styles;
@@ -38,10 +38,12 @@ export default function LoginScreen() {
 
         <Button width={width / 1.3} text="LOGIN" bgColor="#3BD1B3" />
 
-        <View style={[subContainer, { marginBottom: 20 }]}>
-          <Text>Don't have an account?</Text>
-          <Text style={{ fontWeight: "bold" }}>Register here</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <View style={{ alignItems: "center", marginBottom: 40 }}>
+            <Text>Don't have an account?</Text>
+            <Text style={{ fontWeight: "bold" }}>Register here</Text>
+          </View>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </View>
   );
