@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  KeyboardAvoidingView
+} from "react-native";
 import Button from "../components/Button";
 
 export default function RegisterScreen() {
@@ -9,7 +15,7 @@ export default function RegisterScreen() {
   const [password2, onChangePassword2] = React.useState("");
   const { buttonContainer, subContainer, textInput } = styles;
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <View style={subContainer}>
         <Text style={{ fontSize: 20 }}>Create New Account</Text>
       </View>
@@ -44,7 +50,7 @@ export default function RegisterScreen() {
         <Text>Already have an account?</Text>
         <Text style={{ fontWeight: "bold" }}>Sign in</Text>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
